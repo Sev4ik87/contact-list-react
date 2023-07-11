@@ -1,0 +1,29 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+li.selected {
+  background-color: lightgray;
+}
+
+li button {
+  margin-left: 10px;
+  padding: 5px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+li button:hover {
+  background-color: #e53935;
+}

@@ -1,0 +1,51 @@
+.app {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.contacts-section {
+  flex-basis: 60%;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+li.selected {
+  background-color: lightgray;
+}
+
+li button {
+  margin-left: 10px;
+}
+
+.form-section {
+  flex-basis: 35%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 10px;
+}

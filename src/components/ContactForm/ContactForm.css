@@ -1,0 +1,42 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: #2196f3;
+  margin-right: 10px;
+}
+
+button[type="submit"]:hover {
+  background-color: #0e91e1;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button[type="submit"]:disabled,
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+button[type="submit"]:disabled:hover,
+button:disabled:hover {
+  background-color: #cccccc;
+}
