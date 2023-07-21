@@ -1,6 +1,4 @@
-/* ContactItem.css */
 
-/* Основной контейнер для элемента контакта */
 .contact-item {
   display: flex;
   justify-content: space-between;
@@ -12,7 +10,6 @@
   background-color: #f9f9f9;
 }
 
-/* Содержимое контакта (имя и фамилия) */
 .content {
   flex: 1;
   margin: 0;
@@ -20,7 +17,6 @@
   cursor: pointer;
 }
 
-/* Кнопка "X" для удаления контакта */
 .delete-btn {
   font-size: 18px;
   color: #f44336;

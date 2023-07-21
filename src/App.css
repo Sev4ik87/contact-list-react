@@ -1,6 +1,4 @@
-/* App.css */
 
-/* Основной контейнер приложения */
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -8,32 +6,20 @@
   border: black;
 }
 
-/* Заголовок */
 .header {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-/* Контейнер для списка контактов и формы */
 .main {
   display: flex;
   justify-content: space-between;
 }
 
-/* Основные стили для списка контактов */
-/* Вы можете добавить дополнительные стили в зависимости от вашего дизайна */
-.contact-item {
-  /* ... */
-}
 
-/* Основные стили для формы контакта */
-/* Вы можете добавить дополнительные стили в зависимости от вашего дизайна */
-.contact-form {
-  /* ... */
-}
 
-/* Стили для кнопки "New" */
+
 #new {
   background-color: #4CAF50;
   color: white;

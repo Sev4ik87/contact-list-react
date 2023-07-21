@@ -1,18 +1,14 @@
-/* ContactList.css */
 
-/* Основной контейнер списка контактов */
 .list-container {
   max-width: 600px;
   margin: 0 auto;
   border: black;
 }
 
-/* Контейнер для каждого элемента контакта */
 .item-container {
   margin-bottom: 20px;
 }
 
-/* Кнопка "New" для добавления нового контакта */
 #new {
   background-color: #171817;
   color: white;
@@ -23,7 +19,6 @@
   font-size: 16px;
 }
 
-/* Убираем стандартный стиль кнопки при наведении */
 #new:hover {
   opacity: 0.8;
 }
