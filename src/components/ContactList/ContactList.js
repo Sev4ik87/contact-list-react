@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
+import ContactItem from '../ContactItem/ContactItem';
 import './ContactList.css';
 
 
 class ContactList extends Component {
   render() {
-    const { contacts, selectedContact, onEditContact, onDeleteContact } =
-      this.props;
     return (
-      <ul>
-        {contacts.map((contact) => (
-          <li
-            key={contact.id}
-            onClick={() => onEditContact(contact)}
-            className={
-              selectedContact && selectedContact.id === contact.id
-                ? 'selected'
-                : ''
-            }
-          >
-            {contact.firstName} {contact.lastName}
-            <button onClick={() => onDeleteContact(contact)}>×</button>
-          </li>
-        ))}
-      </ul>
-    );
-  }
+      <div className='list-container'>
+        <div className='item-container'>
+          {this.props.contacts.map((contact)=> {
+            return (
+              <ContactItem
+              key={contact.id}
+              contact={contact}
+              onDelete={this.props.onDelete}
+              onEdit={this.props.onEditContact}
+              />
+            );
+          })}
+        </div>
+        <button id='new' onClick={this.props.onAddContact}>New</button>
+      </div>
+
+    ) ;       
+}
 }
 
 export default ContactList;

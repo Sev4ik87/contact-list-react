@@ -1,42 +1,76 @@
-form {
+/* ContactForm.css */
+
+/* Основной контейнер формы */
+#contact-form {
+  border: black;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Контейнер для полей ввода и кнопок */
+.form-container {
+  border: #1f201f;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  gap: 10px;
 }
 
-input {
-  margin-bottom: 10px;
-  padding: 5px;
+/* Стили для полей ввода */
+.contact-info {
+  display: flex;
+  align-items: center;
 }
 
-button {
-  padding: 8px 12px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
+.text-field {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-size: 16px;
+}
+
+/* Стили для кнопки "X" */
+.clear {
+  padding: 8px;
+  border: 1px solid #1a1919;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
   cursor: pointer;
+  font-size: 16px;
 }
 
-button[type="submit"] {
-  background-color: #2196f3;
-  margin-right: 10px;
+.clear {
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border: black solid;
+
 }
 
-button[type="submit"]:hover {
-  background-color: #0e91e1;
+.clear:hover {
+  background-color: #ccc;
 }
 
-button:hover {
-  background-color: #45a049;
+.btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-button[type="submit"]:disabled,
-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+.btns button {
+  background-color: #1f201f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-button[type="submit"]:disabled:hover,
-button:disabled:hover {
-  background-color: #cccccc;
+.btns button:hover {
+  opacity: 0.8;
 }

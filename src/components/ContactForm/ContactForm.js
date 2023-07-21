@@ -1,102 +1,120 @@
 import React, { Component } from 'react';
+
 import './ContactForm.css';
 
 
 class ContactForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-    };
-    this.inputRef = React.createRef();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { selectedContact } = this.props;
-    if (selectedContact !== prevProps.selectedContact) {
-      if (selectedContact) {
-        const { firstName, lastName, email, phone } = selectedContact;
-        this.setState({
-          firstName,
-          lastName,
-          email,
-          phone,
-        });
-        this.inputRef.current.focus();
-      } else {
-        this.setState({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-        });
-      }
-    }
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { firstName, lastName, email, phone } = this.state;
-    this.props.onSaveContact({ firstName, lastName, email, phone });
-    this.props.onClearContact();
+  
+  state = {
+ ...this.props.contactForEdit,
   };
 
-  handleClear = () => {
+  createEmptyContact() {
+    return {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+      };
+   }
+
+   onInputChange = (e) => {
     this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
+    [e.target.name]:e.target.value,
     });
+   }
+ 
+   onClearField = (e) => {
+    const sibling = e.target.parentNode.firstChild;
+    this.setState({
+      [sibling.name]:'',
+    })
+   }
+  
+   onFormSubmit = (e) => {
+   e.preventDefault();
+   this.props.onSubmit({
+   ...this.state,
+   });
   };
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
-
-  render() {
-    const { firstName, lastName, email, phone } = this.state;
-    const { selectedContact } = this.props;
+   onContactDelete = () => {
+    this.props.onDelete(this.props.contactForEdit.id);
+    this.setState({
+      ...this.createEmptyContact()
+    });
+   };
+   
+   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          placeholder="Имя"
-          name="firstName"
-          value={firstName}
-          onChange={this.handleChange}
-          ref={this.inputRef}
-        />
-        <input
-          type="text"
-          placeholder="Фамилия"
-          name="lastName"
-          value={lastName}
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          placeholder="Email"
-          name="email"
-          value={email}
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          placeholder="Телефон"
-          name="phone"
-          value={phone}
-          onChange={this.handleChange}
-        />
-        <button type="submit">{selectedContact ? 'Save' : 'Add'}</button>
-        {selectedContact && <button onClick={this.handleClear}>Clear</button>}
+      <form id='contact-form' onSubmit={this.onFormSubmit}>
+        <div className='form-container'>
+          <div className='contact-info'>
+            <input
+            type='text'
+            className='text-field'
+            placeholder='First name'
+            name='firstName'
+            value={this.state.firstName}
+            onChange={this.onInputChange}
+            />
+            <span className='clear' onClick={this.onClearField}>X</span>
+          </div>
+          <div className='contact-info'>
+            <input
+            type='text'
+            className='text-field'
+            placeholder='Last name'
+            name='lastName'
+            value={this.state.lastName}
+            onChange={this.onInputChange}
+            />
+            <span className='clear' onClick={this.onClearField}>X</span>
+          </div>
+          <div className='contact-info'>
+            <input
+            type='text'
+            className='text-field'
+            placeholder='Email'
+            name='email'
+            value={this.state.email}
+            onChange={this.onInputChange}
+            />
+            <span className='clear' onClick={this.onClearField}>X</span>
+          </div>
+          <div className='contact-info'>
+            <input
+            type='text'
+            className='text-field'
+            placeholder='Phone'
+            name='phone'
+            value={this.state.phone}
+            onChange={this.onInputChange}
+            />
+            <span className='clear' onClick={this.onClearField}>X</span>
+          </div>
+          </div>
+
+
+        <div className='btns'>
+          <button id='save' type='submit'>
+            Save
+         </button>   
+        {this.state.id?(  
+        <button
+        id='delete'
+        type='button'  
+        onClick={this.onContactDelete}
+        >
+        Delete
+       </button>)
+        : 
+        ''
+        }
+        </div>
       </form>
     );
-  }
-}
+   }
 
+  }
 export default ContactForm;

@@ -3,93 +3,117 @@ import ContactList from './components/ContactList/ContactList';
 import ContactForm from './components/ContactForm/ContactForm';
 import './App.css';
 
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      contacts: [],
-      selectedContact: null,
+ state = {
+contacts: [],
+contactForEdit: this.createEmptyContact(),
+
+ };
+
+ createEmptyContact() {
+  return {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
     };
+ }
+
+saveState(contacts)
+{
+  localStorage.setItem('contacts',JSON.stringify(contacts))
+
+}
+restoreState(){
+  const data = localStorage.getItem('contacts');
+  return data ? JSON.parse(data): [];
+}
+
+ componentDidMount() {
+this.setState({
+contacts: this.restoreState(),
+});
+ }
+
+deleteContact=(id) => {
+this.setState((state)=>{
+ const contacts= [
+    ...state.contacts.filter((contact) =>contact.id !==id),
+];
+this.saveState(contacts);
+return {
+  contacts,
+  contactsForEdit:[],
+}
+});
+}
+
+saveContact= (contact) => {
+  if (!contact.id){
+    this.createContact(contact);
+  }else {
+    this.updateContact(contact);
   }
+};
 
-  componentDidMount() {
-    const storedContacts = localStorage.getItem('contacts');
-    if (storedContacts) {
-      this.setState({ contacts: JSON.parse(storedContacts) });
-    }
+addNewContact = ()=> {
+this.setState({
+contactForEdit:this.createEmptyContact(),
+});
+}
+
+selectContact = (contact) => {
+this.setState({
+  contactForEdit:contact,
+})
+};
+
+createContact(contact) {
+  contact.id = Date.now();
+  this.setState((state)=>{
+    const contacts = [...state.contacts,contact];
+    this.saveState(contacts);
+    return {
+      contacts,
+      contactForEdit: this.createEmptyContact(),
+
+    };
+  });
+}
+
+updateContact(contact){
+  this.setState((state)=>{
+    const contacts= state.contacts.map((item)=>
+    item.id === contact.id? contact:item
+    );
+    return {
+      contacts,
+      contactForEdit: contact,
+    };
+  });
   }
-
-  componentDidUpdate() {
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  }
-
-  handleSaveContact = (contact) => {
-    const { selectedContact, contacts } = this.state;
-    if (selectedContact) {
-      const updatedContacts = contacts.map((c) =>
-        c.id === selectedContact.id ? contact : c
-      );
-      this.setState({
-        contacts: updatedContacts,
-        selectedContact: null,
-      });
-    } else {
-      const newContact = { ...contact, id: Date.now() };
-      this.setState((prevState) => ({
-        contacts: [...prevState.contacts, newContact],
-      }));
-    }
-  };
-
-  handleDeleteContact = () => {
-    const { selectedContact, contacts } = this.state;
-    if (selectedContact) {
-      const updatedContacts = contacts.filter(
-        (c) => c.id !== selectedContact.id
-      );
-      this.setState({
-        contacts: updatedContacts,
-        selectedContact: null,
-      });
-    }
-  };
-
-  handleEditContact = (contact) => {
-    this.setState({ selectedContact: contact });
-  };
-
-  handleClearContact = () => {
-    this.setState({ selectedContact: null });
-  };
-
-  handleNewContact = () => {
-    this.setState({ selectedContact: null });
-  };
 
   render() {
-    const { contacts, selectedContact } = this.state;
     return (
-      <div className="app">
-        <div className="contacts-section">
-          <h2>Список контактов</h2>
+      <div className='container'>
+        <h1 className='header'>Contact List</h1>
+        <div className='main'>
           <ContactList
-            contacts={contacts}
-            selectedContact={selectedContact}
-            onEditContact={this.handleEditContact}
-            onDeleteContact={this.handleDeleteContact}
+          contacts={this.state.contacts}
+          onDelete={this.deleteContact}
+          onAddContact={this.addNewContact}
+          onEditContact={this.selectContact}
           />
-        </div>
-        <div className="form-section">
-          <h2>Форма добавления</h2>
           <ContactForm
-            selectedContact={selectedContact}
-            onSaveContact={this.handleSaveContact}
-            onClearContact={this.handleClearContact}
+          key={this.state.contactForEdit.id}
+          contactForEdit={this.state.contactForEdit}
+          onSubmit={this.saveContact}
+          onDelete={this.deleteContact}
           />
-          <button onClick={this.handleNewContact}>New</button>
         </div>
       </div>
-    );
+    )
   }
 }
 

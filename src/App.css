@@ -1,51 +1,49 @@
-.app {
+/* App.css */
+
+/* Основной контейнер приложения */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: black;
+}
+
+/* Заголовок */
+.header {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Контейнер для списка контактов и формы */
+.main {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px;
 }
 
-.contacts-section {
-  flex-basis: 60%;
+/* Основные стили для списка контактов */
+/* Вы можете добавить дополнительные стили в зависимости от вашего дизайна */
+.contact-item {
+  /* ... */
 }
 
-h2 {
-  margin-top: 0;
+/* Основные стили для формы контакта */
+/* Вы можете добавить дополнительные стили в зависимости от вашего дизайна */
+.contact-form {
+  /* ... */
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
+/* Стили для кнопки "New" */
+#new {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
+  font-size: 16px;
 }
 
-li.selected {
-  background-color: lightgray;
-}
-
-li button {
-  margin-left: 10px;
-}
-
-.form-section {
-  flex-basis: 35%;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-input {
-  margin-bottom: 10px;
-}
-
-button {
-  margin-top: 10px;
+#new:hover {
+  opacity: 0.8;
 }
