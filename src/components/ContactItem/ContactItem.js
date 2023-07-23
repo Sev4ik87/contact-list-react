@@ -4,13 +4,13 @@ import './ContactItem.css';
 export class ContactItem extends Component {
 
   onItemDelete = (e) => {
-    e.stopPropagation();
     this.props.onDelete(this.props.contact.id)
   }
+
   onContactEdit = (e) => {
-    e.stopPropagation()
     this.props.onEdit(this.props.contact)
   }
+  
   render() {
     return (
       <div className='contact-item'>

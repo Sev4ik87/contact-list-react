@@ -9,8 +9,18 @@ class ContactForm extends Component {
  ...this.props.contactForEdit,
   };
 
+  static getDrivedStateFromProps(props,state){
+    if(state.id ===props.contactForEdit.id){
+      return{};
+    }
+    return {
+      ...props.contactForEdit
+    }
+  }
+
   createEmptyContact() {
     return {
+    id: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -54,6 +64,7 @@ class ContactForm extends Component {
             type='text'
             className='text-field'
             placeholder='First name'
+            required
             name='firstName'
             value={this.state.firstName}
             onChange={this.onInputChange}
@@ -65,6 +76,7 @@ class ContactForm extends Component {
             type='text'
             className='text-field'
             placeholder='Last name'
+            required
             name='lastName'
             value={this.state.lastName}
             onChange={this.onInputChange}
@@ -73,9 +85,10 @@ class ContactForm extends Component {
           </div>
           <div className='contact-info'>
             <input
-            type='text'
+            type='email'
             className='text-field'
             placeholder='Email'
+            required
             name='email'
             value={this.state.email}
             onChange={this.onInputChange}
@@ -87,6 +100,7 @@ class ContactForm extends Component {
             type='text'
             className='text-field'
             placeholder='Phone'
+            required
             name='phone'
             value={this.state.phone}
             onChange={this.onInputChange}

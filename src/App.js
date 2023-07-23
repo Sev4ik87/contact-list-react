@@ -36,10 +36,10 @@ contacts: this.restoreState(),
 });
  }
 
-deleteContact=(id) => {
-this.setState((state)=>{
- const contacts= [
-    ...state.contacts.filter((contact) =>contact.id !==id),
+deleteContact  = (id) => {
+this.setState((state) => {
+ const contacts = [
+    ...state.contacts.filter((contact) => contact.id !== id),
 ];
 this.saveState(contacts);
 return {
@@ -83,10 +83,11 @@ createContact(contact) {
 }
 
 updateContact(contact){
-  this.setState((state)=>{
-    const contacts= state.contacts.map((item)=>
-    item.id === contact.id? contact:item
+  this.setState((state) => {
+    const contacts = state.contacts.map((item) =>
+    item.id === contact.id? contact : item
     );
+    this.saveState(contacts);
     return {
       contacts,
       contactForEdit: contact,
